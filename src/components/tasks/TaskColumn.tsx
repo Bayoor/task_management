@@ -17,7 +17,7 @@ export const TaskColumn = ({ status, tasks, onEdit, onDelete }: TaskColumnProps)
   const column = STATUS_COLUMNS[status];
 
   return (
-    <div className="flex min-h-[500px] w-full flex-col">
+    <div className="flex min-h-[300px] md:min-h-[500px] w-full flex-col">
       <div
         className={cn(
           'mb-4 rounded-lg p-3',
