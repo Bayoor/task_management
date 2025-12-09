@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       default:
         'bg-[hsl(var(--color-primary))] text-[hsl(var(--color-primary-foreground))] hover:bg-[hsl(var(--color-primary))]/90',
       outline:
-        'border border-[hsl(var(--color-border))] bg-transparent hover:bg-[hsl(var(--color-accent))] hover:text-[hsl(var(--color-accent-foreground))]',
+        'border border-[hsl(var(--color-border))] bg-transparent text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-accent))] hover:text-[hsl(var(--color-accent-foreground))]',
       ghost:
         'hover:bg-[hsl(var(--color-accent))] hover:text-[hsl(var(--color-accent-foreground))]',
       destructive:
