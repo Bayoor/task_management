@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Task, TaskFormData } from '@/types/task';
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import { TASK_STATUSES, TASK_PRIORITIES } from '@utils/constants';
+import { Calendar } from 'lucide-react';
 
 interface TaskFormProps {
   task?: Task;
@@ -11,6 +12,7 @@ interface TaskFormProps {
 }
 
 export const TaskForm = ({ task, onSubmit, onCancel }: TaskFormProps) => {
+  const dateInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<TaskFormData>({
     title: '',
     description: '',
@@ -98,11 +100,19 @@ export const TaskForm = ({ task, onSubmit, onCancel }: TaskFormProps) => {
 
       <div>
         <label className="mb-2 block text-sm font-medium text-[hsl(var(--color-foreground))]">Due Date</label>
-        <Input
-          type="date"
-          value={formData.dueDate}
-          onChange={e => setFormData({ ...formData, dueDate: e.target.value })}
-        />
+        <div className="relative">
+          <Input
+            ref={dateInputRef}
+            type="date"
+            value={formData.dueDate}
+            onChange={e => setFormData({ ...formData, dueDate: e.target.value })}
+            className="cursor-pointer [color-scheme:dark]"
+            onClick={() => dateInputRef.current?.showPicker?.()}
+          />
+          <Calendar
+            className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white pointer-events-none"
+          />
+        </div>
       </div>
 
       <div className="flex justify-end gap-2">

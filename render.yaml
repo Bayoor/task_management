@@ -1,9 +1,11 @@
 services:
   - type: web
-    name: task-manager
+    name: task-manager-backend
     env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
     envVars:
       - key: NODE_VERSION
         value: 22.16.0
+      - key: MONGODB_URI
+        sync: false

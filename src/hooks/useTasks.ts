@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { taskApi } from '@services/api/taskApi';
 import type { Task, TaskFormData } from '@/types/task';
+import { toast } from 'sonner';
 
 export const useTasks = () => {
   const queryClient = useQueryClient();
@@ -14,6 +15,10 @@ export const useTasks = () => {
     mutationFn: taskApi.createTask,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      toast.success('Task created successfully!');
+    },
+    onError: () => {
+      toast.error('Failed to create task');
     },
   });
 
@@ -30,10 +35,14 @@ export const useTasks = () => {
 
       return { previousTasks };
     },
+    onSuccess: () => {
+      toast.success('Task updated successfully!');
+    },
     onError: (_err, _variables, context) => {
       if (context?.previousTasks) {
         queryClient.setQueryData(['tasks'], context.previousTasks);
       }
+      toast.error('Failed to update task');
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
@@ -44,6 +53,10 @@ export const useTasks = () => {
     mutationFn: taskApi.deleteTask,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      toast.success('Task deleted successfully!');
+    },
+    onError: () => {
+      toast.error('Failed to delete task');
     },
   });
 
